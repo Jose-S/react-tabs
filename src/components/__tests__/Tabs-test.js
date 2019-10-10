@@ -120,61 +120,35 @@ describe('<Tabs />', () => {
   });
 
   describe('interaction', () => {
-    describe('mouse', () => {
-      test('should update selectedIndex when clicked', () => {
-        const wrapper = mount(createTabs());
-        wrapper
-          .find(Tab)
-          .at(1)
-          .simulate('click');
+    test('should update selectedIndex when clicked', () => {
+      const wrapper = mount(createTabs());
+      wrapper
+        .find(Tab)
+        .at(1)
+        .simulate('click');
 
-        assertTabSelected(wrapper, 1);
-      });
-
-      test('should update selectedIndex when tab child is clicked', () => {
-        const wrapper = mount(createTabs());
-        wrapper
-          .find(Tab)
-          .at(2)
-          .childAt(0)
-          .simulate('click');
-
-        assertTabSelected(wrapper, 2);
-      });
-
-      test('should not change selectedIndex when clicking a disabled tab', () => {
-        const wrapper = mount(createTabs({ defaultIndex: 0 }));
-        wrapper
-          .find(Tab)
-          .at(3)
-          .simulate('click');
-
-        assertTabSelected(wrapper, 0);
-      });
+      assertTabSelected(wrapper, 1);
     });
 
-    describe('keyboard', () => {
-      test('should update selectedIndex when arrow right key pressed', () => {
-        const wrapper = mount(createTabs());
-        wrapper
-          .find(Tab)
-          .at(1)
-          .simulate('focus')
-          .simulate('keydown', { keyCode: 39 });
+    test('should update selectedIndex when tab child is clicked', () => {
+      const wrapper = mount(createTabs());
+      wrapper
+        .find(Tab)
+        .at(2)
+        .childAt(0)
+        .simulate('click');
 
-        assertTabSelected(wrapper, 1);
-      });
+      assertTabSelected(wrapper, 2);
+    });
 
-      test.skip('should not change selectedIndex when arrow left key pressed on a disabled tab', () => {
-        const wrapper = mount(createTabs({ defaultIndex: 0 }));
-        wrapper
-          .find(Tab)
-          .at(3)
-          .simulate('focus')
-          .simulate('keydown', { keyCode: 37 });
+    test('should not change selectedIndex when clicking a disabled tab', () => {
+      const wrapper = mount(createTabs({ defaultIndex: 0 }));
+      wrapper
+        .find(Tab)
+        .at(3)
+        .simulate('click');
 
-        assertTabSelected(wrapper, 0);
-      });
+      assertTabSelected(wrapper, 0);
     });
   });
 
